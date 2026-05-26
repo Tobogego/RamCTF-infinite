@@ -126,7 +126,7 @@ public class Teams implements Listener{
                     if(GameProperties.isGamePaused()){
                         GameInfo.setSuffix(ChatColor.GREEN + "Game Paused - " + ChatColor.GOLD + GameProperties.minutesUntilGameEnd() + " minutes left");
                     } else {
-                        GameInfo.setSuffix(ChatColor.GREEN + "Game Ending in " + ChatColor.GOLD + GameProperties.minutesUntilGameEnd() + " minutes");
+                        GameInfo.setSuffix(ChatColor.GREEN + "");
                     } 
                 } else {
                     GameInfo.setSuffix(ChatColor.GREEN + "No Game Running");
