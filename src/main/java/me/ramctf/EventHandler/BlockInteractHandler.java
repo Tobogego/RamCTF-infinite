@@ -10,39 +10,42 @@ import me.ramctf.GameProperties;
 import me.ramctf.Helpers;
 
 public class BlockInteractHandler implements Listener {
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        int distance = 3;
-        if(!GameProperties.flagBuildProtection()){
-            distance = 1;
-        }
+@EventHandler
+public void onBlockBreak(BlockBreakEvent e) {
+    int distance = 3;
+    if(!GameProperties.flagBuildProtection()){
+        distance = 1;
+    }
 
-        Block b = e.getBlock();
-        int x, z;
+    Block b = e.getBlock();
+    int x, y, z;
 
-        if(GameProperties.blueFlagLocationBase() != null){
-            x = Helpers.get3AxisDistance(b.getLocation(), GameProperties.blueFlagLocationBase())[0];
-            z = Helpers.get3AxisDistance(b.getLocation(), GameProperties.blueFlagLocationBase())[2];
+    if(GameProperties.blueFlagLocationBase() != null){
+        int[] axis = Helpers.get3AxisDistance(b.getLocation(), GameProperties.blueFlagLocationBase());
+        x = axis[0];
+        y = axis[1];
+        z = axis[2];
 
-            if(x < distance && z < distance){
-                e.setCancelled(true);
-            }
-        }
-
-        if(GameProperties.redFlagLocationBase() != null){
-            x = Helpers.get3AxisDistance(b.getLocation(), GameProperties.redFlagLocationBase())[0];
-            z = Helpers.get3AxisDistance(b.getLocation(), GameProperties.redFlagLocationBase())[2];
-
-            if(x < distance && z < distance){
-                e.setCancelled(true);
-            }
-        }
-        
-        if(b.getLocation().equals(GameProperties.blueFlagCurrentLocation()) || b.getLocation().equals(GameProperties.redFlagCurrentLocation())){
+        if(x < distance && z < distance && y < 3){  // Add Y check here
             e.setCancelled(true);
         }
-    
     }
+
+    if(GameProperties.redFlagLocationBase() != null){
+        int[] axis = Helpers.get3AxisDistance(b.getLocation(), GameProperties.redFlagLocationBase());
+        x = axis[0];
+        y = axis[1];
+        z = axis[2];
+
+        if(x < distance && z < distance && y < 3){  // Add Y check here
+            e.setCancelled(true);
+        }
+    }
+    
+    if(b.getLocation().equals(GameProperties.blueFlagCurrentLocation()) || b.getLocation().equals(GameProperties.redFlagCurrentLocation())){
+        e.setCancelled(true);
+    }
+}
 
 @EventHandler
 public void onBlockPlace(BlockPlaceEvent e){
