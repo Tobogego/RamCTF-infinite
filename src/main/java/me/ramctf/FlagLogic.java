@@ -162,7 +162,6 @@ public class FlagLogic implements Listener{
         p.playSound(p.getLocation(), org.bukkit.Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 1, 1);
         Teams.broadcastMessage(p.getName() + ChatColor.GREEN + " returned your flag", "Blue");
         Teams.broadcastMessage(p.getName() + ChatColor.RED + " returned enemy flag", "Red");
-        GameManager.endGame();
     }
 
     private static void playerStoleRedFlagTasks(Player p){
@@ -175,7 +174,6 @@ public class FlagLogic implements Listener{
         Teams.playAlarm("Red");
         Teams.broadcastMessage(p.getName() + ChatColor.RED + " stole your flag", "Red");
         Teams.broadcastMessage(p.getName() + ChatColor.GREEN +  " stole enemy flag", "Blue");
-        GameManager.endGame();
     }
 
     private static void playerStoleBlueFlagTasks(Player p){
@@ -199,6 +197,7 @@ public class FlagLogic implements Listener{
         p.removePotionEffect(PotionEffectType.GLOWING);
         Teams.broadcastMessage(p.getName() + ChatColor.GREEN + " captured enemy flag", "Blue");
         Teams.broadcastMessage(p.getName() + ChatColor.RED + " captured your flag", "Red");
+        GameManager.endGame();
     }
 
     private static void playerCapturedBlueFlagTasks(Player p){
@@ -210,6 +209,7 @@ public class FlagLogic implements Listener{
         p.removePotionEffect(PotionEffectType.GLOWING);
         Teams.broadcastMessage(p.getName() + ChatColor.GREEN + " captured enemy flag", "Red");
         Teams.broadcastMessage(p.getName() + ChatColor.RED + " captured your flag", "Blue");
+        GameManager.endGame();
     }
 
 }
