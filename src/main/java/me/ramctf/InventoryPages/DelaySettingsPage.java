@@ -30,8 +30,8 @@ public class DelaySettingsPage implements Listener{
                 return;
             } 
             
-            GameProperties.pregameTimer = timeOptions[slot];
-            p.sendMessage(ChatColor.GREEN + "Pregame Timer set to " + GameProperties.pregameTimer + " minutes");
+            GameProperties.setPregameDuration(timeOptions[slot]);
+            p.sendMessage(ChatColor.GREEN + "Pregame Timer set to " + GameProperties.pregameTimer() + " minutes");
             GameSettingsPage.ShowHomePage(p);
 
         }
