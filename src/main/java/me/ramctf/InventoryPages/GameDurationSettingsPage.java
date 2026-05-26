@@ -16,7 +16,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class GameDurationSettingsPage implements Listener{
     static String inventoryName = "Game Duration";
-    static int[] timeOptions = {5, 10, 15, 20, 25, 30, 40, 50, 60};
+    static int[] timeOptions = {5, 10, 15, 20, 25, 30, 40, 50, 60, -1};
 
     @EventHandler
     public void onPlayerClickInventory(InventoryClickEvent e){
@@ -31,7 +31,8 @@ public class GameDurationSettingsPage implements Listener{
             } 
             
             GameProperties.setGameDuration(timeOptions[slot]);
-            p.sendMessage(ChatColor.GREEN + "Game duration set to " + GameProperties.gameTimer() + " minutes");
+            String durationMessage = timeOptions[slot] == -1 ? "Infinite" : timeOptions[slot] + " minutes";
+            p.sendMessage(ChatColor.GREEN + "Game duration set to " + durationMessage);
             GameSettingsPage.ShowHomePage(p);
 
         }
@@ -39,8 +40,8 @@ public class GameDurationSettingsPage implements Listener{
 
     public static void ShowHomePage(Player p){
 
-        Inventory inv = Bukkit.createInventory(p, 9, inventoryName);
-        for(int i = 0; i < 9; i++){
+        Inventory inv = Bukkit.createInventory(p, 18, inventoryName);
+        for(int i = 0; i < timeOptions.length; i++){
             inv.setItem(i, InventorySlotsGameTimerSelection.getTimeOptions(i, timeOptions));
         }
 
